@@ -8,11 +8,11 @@ module.exports = (sequelize) => {
   sequelize.define('country', {
     code: {
       type: DataTypes.STRING(3),
-      primaryKey: true
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      // unique: true
     },
     image: {
       type: DataTypes.ARRAY(DataTypes.STRING),

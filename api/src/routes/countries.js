@@ -1,47 +1,27 @@
 const { Router } = require('express');
 const { Country } = require('../db.js');
-const fetch = require('node-fetch');
-
-
-
 
 const router = Router();
 
-router.get('/',async (req,res) => {
-    
-
-   var allcountries = fetch('https://restcountries.com/v3/all')
-   .then(response => response.json())
-
-   allcountries.then(async r =>{
-      var PROMISE_ARRAY = r.map( e => {
-          
-          Country.create({
-              code : e.cca3,
-              name: e.name.common,
-              image: e.flags,
-              continent: e.continents,
-              capital: e.capital || ["No tiene capital"],
-              subRegion: e.subregion,
-              area: e.area,
-              population: e.population
-
-          })
-      })
-      await Promise.all(PROMISE_ARRAY)
-   })
-
-
-    
+router.get('/',async (req,res,next) => {
+   try{
+       const countries = await Country.findAll();
+        res.status(200).json(countries)
+   }catch(err){
+       next(err)
+   }    
 })
 
 
-router.get('/:idcountry',async (req,res) => {
-    
+router.get('/:idcountry',async (req,res,next) => {
+    const idcountry = req.params.idcountry;
+    try{
+        const country = await Country.findByPk(idcountry);
+        res.status(200).json(country);
+    }catch(err){
+        next(err)
+    }  
 })
 
-router.post('/activity',async (req,res) => {
-    
-})
 
 module.exports = router;

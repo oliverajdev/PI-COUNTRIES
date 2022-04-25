@@ -3,6 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const { count } = require('console');
+const fetch = require('node-fetch');
 const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
@@ -37,8 +38,30 @@ const { Country, Tourism } = sequelize.models;
 // Product.hasMany(Reviews);
 
 
+
+
 Country.belongsToMany(Tourism, {through: 'country_turism'});
 Tourism.belongsToMany(Country, {through: 'country_turism'});
+
+const allcountries = fetch('https://restcountries.com/v3/all')
+.then(response => response.json())
+
+allcountries.then(async r =>{
+   const PROMISE_ARRAY =r.map( e => {
+       Country.create({
+           code : e.cca3,
+           name: e.name.common,
+           image: e.flags,
+           continent: e.continents,
+           capital: e.capital || ["No tiene capital"],
+           subRegion: e.subregion,
+           area: e.area,
+           population: e.population
+       })
+   })
+   await Promise.all(PROMISE_ARRAY);
+   
+})
 
 
 
