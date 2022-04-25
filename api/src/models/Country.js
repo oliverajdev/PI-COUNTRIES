@@ -1,11 +1,12 @@
 const { DataTypes } = require('sequelize');
+const { get } = require('../routes');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('country', {
-    id: {
+    code: {
       type: DataTypes.STRING(3),
       primaryKey: true
     },
@@ -29,12 +30,16 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     area: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
     },
     population: {
       type: DataTypes.INTEGER,
     }
     
+  },{
+    timestamps:false,
+    createdAt: false,
+    updateAt:false
   });
 };
 
