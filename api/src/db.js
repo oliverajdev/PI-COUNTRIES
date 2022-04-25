@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+const fetch = require('node-fetch')
 const { count } = require('console');
 const {
   DB_USER, DB_PASSWORD, DB_HOST,
@@ -40,16 +41,18 @@ const { Country, Tourism } = sequelize.models;
 Country.belongsToMany(Tourism, {through: 'country_turism'});
 Tourism.belongsToMany(Country, {through: 'country_turism'});
 
+
 sequelize.sync({force:true})
 .then(
   fetch('https://restcountries.com/v3/all')
   .then(response => response.json())
   .then(array_countries =>{
       array_countries.map(country => Country.create({
+          code: country.cca3,
           name: country.name.common,
-          image: country.flag[0],
-          continent: country.coninents[0],
-          capital: country.capital[0],
+          image: country.flag,
+          continent: country.continents,
+          capital: country.capital,
           subRegion: country.subregion,
           area: country.area,
           population: country.population,
