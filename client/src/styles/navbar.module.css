@@ -1,0 +1,16 @@
+.ul_list li{
+  display: inline-block;
+  width: 100px;
+  float: left;
+}
+
+.search{
+    float: right;
+    margin-right: 20px;
+}
+
+.navbar{
+    width: 100%;
+    height: 70px;
+    margin-bottom: 50px;
+}
