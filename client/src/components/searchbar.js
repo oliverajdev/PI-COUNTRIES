@@ -17,18 +17,14 @@ export function SearchBar(props) {
         onChange={(e) => setCountry(e.target.value)}
       />
       <input type="submit" value="Search" />
-      {console.log(props.search)}
+    
     </form>
+    
     
   );
 }
 
-export const mapStateToProps = function(state){
-  return {
- 
-      search: state.search
-  }
-};
+
 
 export const mapDispatchToProps = function(dispatch){
   return {
@@ -38,4 +34,4 @@ export const mapDispatchToProps = function(dispatch){
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export default connect(null,mapDispatchToProps)(SearchBar);

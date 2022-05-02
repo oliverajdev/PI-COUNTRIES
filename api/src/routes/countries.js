@@ -29,6 +29,60 @@ router.get('/',async (req,res,next) => {
    }    
 })
 
+router.get('/order', async (req,res,next) => {
+    const {value,continent} = req.query;
+    try{
+        if(continent){
+            const countries = await Country.findAll({
+                where:{
+                    continent: [continent]
+                }
+            })
+            res.status(200).json(countries)
+
+        }
+        else if(value === 'asc'){
+            const countries = await Country.findAll({
+                order: [
+                    ['name', 'ASC']
+                ]
+            })
+
+            res.status(200).json(countries)
+        }else if(value === 'desc'){
+            const countries = await Country.findAll({
+                order: [
+                    ['name', 'DESC']
+                ]
+            })
+
+            res.status(200).json(countries)
+
+        }else if(value === 'popasc'){
+            const countries = await Country.findAll({
+                order: [
+                    ['population', 'ASC']
+                ]
+            })
+            res.status(200).json(countries)
+
+        }else if(value === 'popdesc'){
+            const countries = await Country.findAll({
+                order: [
+                    ['population', 'desc']
+                ]
+            })
+            res.status(200).json(countries)
+        }
+    }catch(err){
+        next(err)
+    }
+})
+
+
+
+
+
 
 router.get('/:idcountry',async (req,res,next) => {
     const idcountry = req.params.idcountry;

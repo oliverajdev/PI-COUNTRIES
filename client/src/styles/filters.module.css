@@ -1,0 +1,12 @@
+.ul_list li:link{
+    background-color: red;
+}
+
+.ul_list:hover{
+    cursor: pointer;
+    ;
+}
+
+.ul_list {
+    list-style: none
+}

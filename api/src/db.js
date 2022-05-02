@@ -51,8 +51,8 @@ allcountries.then(async r =>{
        Country.create({
            code : e.cca3,
            name: e.name.common,
-           image: e.flags,
-           continent: e.continents,
+           image: e.flags[0],
+           continent: e.continents[0],
            capital: e.capital || ["No tiene capital"],
            subRegion: e.subregion,
            area: e.area,
