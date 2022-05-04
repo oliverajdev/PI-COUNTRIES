@@ -6,6 +6,9 @@ module.exports =  (sequelize) => {
         name: {
             type: DataTypes.STRING,
         },
+        types: {
+            type: DataTypes.ENUM('Recreation','Cultural','Deportivo','Natural','Health')
+        },
         difficulty: {
             type: DataTypes.INTEGER,
         },
@@ -13,8 +16,12 @@ module.exports =  (sequelize) => {
             type: DataTypes.INTEGER,
         },
         season:{
-            type: DataTypes.ENUM('Verano','Otoño','Invierno','Primavera')
+            type: DataTypes.ENUM('Summer','Outumn','Winter','Spring')
         }
-    })
+    },{
+        timestamps:false,
+        createdAt: false,
+        updateAt:false
+      })
 }
 

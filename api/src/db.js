@@ -40,8 +40,8 @@ const { Country, Tourism } = sequelize.models;
 
 
 
-Country.belongsToMany(Tourism, {through: 'country_turism'});
-Tourism.belongsToMany(Country, {through: 'country_turism'});
+Country.belongsToMany(Tourism, {through: 'country_tourism'});
+Tourism.belongsToMany(Country, {through: 'country_tourism'});
 
 const allcountries = fetch('https://restcountries.com/v3/all')
 .then(response => response.json())

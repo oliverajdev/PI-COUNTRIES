@@ -4,6 +4,7 @@ import ToHome from './pages/tohome';
 import Home from './pages/home'
 import Nav from './components/navbar';
 import  DetailCountry  from './pages/detailcountry';
+import  AddActivity from './pages/addactivity';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route exact path='/home' element={<Home/>}/>
 
         <Route exact path='/detail/:code' element={<DetailCountry/>}/>
+
+        <Route exact path='/addactivity' element={<AddActivity/>}/>
         
       </Routes>      
       

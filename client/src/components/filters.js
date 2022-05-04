@@ -10,7 +10,7 @@ export function Filters(props) {
         <div>
             <h4>By continent</h4>
             <ul className={s.ul_list}>
-                {console.log(props)}
+
                 <li onClick={() => props.FilterAndOrder(null,'South America')} >South America</li>
                 <li onClick={() => props.FilterAndOrder(null,'North America')} >North America</li>
                 <li onClick={() => props.FilterAndOrder(null,'Africa')} >Africa</li>
@@ -21,8 +21,11 @@ export function Filters(props) {
             </ul>
             <h4>By Activities</h4>
             <ul className={s.ul_list}>
-               <li>ascedent</li>
-               <li>desendent</li>
+               <li onClick={() => props.FilterAndOrder('Recreation')} >Recreation</li>
+               <li onClick={() => props.FilterAndOrder('Cultural')} >Cultural</li>
+               <li onClick={() => props.FilterAndOrder('Deportivo')} >Deportivo</li>
+               <li onClick={() => props.FilterAndOrder('Natural')} >Natural</li>
+               <li onClick={() => props.FilterAndOrder('Health')} >Health</li>
             </ul>
             <h4>By Alphabetical order</h4>
             <ul className={s.ul_list}>

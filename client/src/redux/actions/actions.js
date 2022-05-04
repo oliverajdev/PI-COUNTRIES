@@ -5,6 +5,7 @@ export const PREVIOUS_PAGE = 'PREVIOUS_PAGE'
 export const FILTER_COUNTRIES = 'FILTER_COUNTRIES'
 export const FILTER_ORDER = 'FILTER_ORDER'
 export const COUNTRY_DETAIL = 'COUNTRY_DETAIL'
+export const FILTER_BY_ACTIVITIES = 'FILTER_BY_ACTIVITIES'
 
 
 export const getAllCountries = () => dispatch => {
@@ -69,6 +70,8 @@ export const FilterAndOrder = (value,cont) => dispatch => {
         })
     })
 }
+
+
 
 
 export const CountryDetail = (code) => dispatch => {

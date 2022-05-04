@@ -1,4 +1,4 @@
-import {COUNTRY_DETAIL, FILTER_ORDER, FILTER_COUNTRIES, GET_ALL_COUNTRIES,GET_PAG_COUNTRIES, NEXT_PAGE, PREVIOUS_PAGE} from "../actions/actions"
+import {COUNTRY_DETAIL, FILTER_ORDER, FILTER_COUNTRIES, GET_ALL_COUNTRIES,GET_PAG_COUNTRIES, NEXT_PAGE, PREVIOUS_PAGE, FILTER_BY_ACTIVITIES} from "../actions/actions"
 
 const inicialState = {
     countries : [],
@@ -38,6 +38,10 @@ const rootReducer = (state = inicialState, action) => {
             countries: action.payload,
             paginateCountries: action.payload.slice(0,9),
             currentPag: 0
+        }
+        case COUNTRY_DETAIL: return {
+            ...state,
+            country: action.payload
         }
         case COUNTRY_DETAIL: return {
             ...state,
