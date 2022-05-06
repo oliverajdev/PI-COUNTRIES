@@ -39,7 +39,6 @@ const { Country, Tourism } = sequelize.models;
 
 
 
-
 Country.belongsToMany(Tourism, {through: 'country_tourism'});
 Tourism.belongsToMany(Country, {through: 'country_tourism'});
 
