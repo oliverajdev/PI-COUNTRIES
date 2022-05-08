@@ -3,6 +3,7 @@ import { FilterAndOrder } from "../redux/actions/actions";
 import { connect } from "react-redux";
 import { useEffect } from "react"
 import { useState } from "react";
+import s from "../styles/addactivity.module.css"
 
 export function AddActivity(props) {
 
@@ -28,31 +29,46 @@ export function AddActivity(props) {
 
 
     const ValidatorName = (input) => {
-        if(input){
-            if(!/[a-zA-Z ]{2,254}/g.test(input)) setError('Solo debe contener A-Z')
-            else setError('')
-            setInputActivities({...inputsActivities, name: input})
 
-   
-    }
+      if(!/[a-zA-Z ]{1,60}/.test(input) && input !== '') setError('Solo debe contener letras')
+      else setError('')
+            
+      setInputActivities({...inputsActivities, name: input})
 
 }
 const ValidatorDuration = (input) => {
-    if(input){
-  if(typeof input !== 'number') setError('Deben ser numeros')
-  if(input > 24) setError('No debe exeder las 24 hs')
+  if(!/[0-9]/.test(input) && input !== '') setError('Solo acepta valores numericos')
+  else if(input > 24) setError('No debe exeder las 24 hs')
   else setError('')
-  setInputActivities({...inputsActivities, duration: input})
-      
+
+
+setInputActivities({...inputsActivities, duration: input})
+
+}
+
+
+const DeleteCountry = (input) =>{
+
+    setCountry('')
   
+    const index = bodyCountries.findIndex( e => e === input)
+ 
+    setBodyCountries(bodyCountries.filter(e => e !== input))
+    setInputActivities({...inputsActivities,countries: inputsActivities.countries.filter((e,i) => i !== index)})
+
 
 }
 
-}
 
+    const PostActivity = (e) => {
+      
+      if(error && error !== 'Faltan Rellenar campos') {
+          e.preventDefault()
+          return
+      }
 
-    const PostActivity = () => {
-      if(!error){
+      
+      if(!(inputsActivities.difficulty === '' || inputsActivities.duration === '' || inputsActivities.season === '' || inputsActivities.countries.length === 0)){
         fetch('http://localhost:3001/activity', {
             method: 'POST',
             body: JSON.stringify(inputsActivities), 
@@ -63,8 +79,10 @@ const ValidatorDuration = (input) => {
           .catch(error => console.error('Error:', error))
           .then(response => console.log('Success:', response));
       }else{
-
-      }
+        e.preventDefault()
+        setError('Faltan Rellenar campos')
+    } 
+    
     }
 
     useEffect(() => {
@@ -77,62 +95,110 @@ const ValidatorDuration = (input) => {
 
 
     return(
-        <div>
-            <form>
-
-                <input 
+        <div className={s.container}>
+            <form className={s.form}>
+               {!error ? null : <span>{error}</span>}
+              <div className={s.conteiner_input}>
+              <h6 className={s.title}>Name</h6>
+              <input 
+                className={`${s.input} ${s.inputtext}`}
                 name='name' 
                 value={inputsActivities.name} 
                 onChange={(e) => ValidatorName(e.target.value)} 
-                placeholder='name'> 
+                placeholder='Name'> 
                 </input>
+              </div>
 
-                <label for='seasons'>Seasons</label>
-                    <select name='seasons' onChange={(e) => setInputActivities({...inputsActivities,types: e.target.value})}>
+              <div className={s.conteiner_input}>
+              <h6 className={s.title}>Duration</h6>  
+                <input 
+                className={`${s.input} ${s.inputtext}`}
+                name='duration' 
+                value={inputsActivities.duration} 
+                onChange={(e) => ValidatorDuration(e.target.value)} 
+                placeholder='Duration'>   
+                </input>
+                </div>
+
+              <div className={s.conteiner_input}>
+              <label className={s.title} for='seasons'>Type</label>
+                    <select 
+                    className={s.select}
+                    name='seasons' 
+                    onChange={(e) => setInputActivities({...inputsActivities,types: e.target.value})}
+                    >
                         <option disabled selected>Select an option</option>
                         {types.map(e => <option value={e}>{e}</option>)}
 
                     </select>
+              </div>
 
-                <label for='dififculty'>Difficulty</label>
-                    <select name='difficulty' onChange={(e) => setInputActivities({...inputsActivities,difficulty: e.target.value})}>
+              <div className={s.conteiner_input}>
+              <label  className={s.title} for='dififculty'>Difficulty</label>
+                    <select 
+                    className={s.select}
+                    name='difficulty' 
+                    onChange={(e) => setInputActivities({...inputsActivities,difficulty: e.target.value})}
+                    >
                         <option disabled selected>Select an option</option>
                         {difficulty.map(e => <option value={e}>{e}</option>)}
 
                     </select>
-        
-                <input 
-                name='duration' 
-                value={inputsActivities.duration} 
-                onChange={(e) => ValidatorDuration(e.target.value)} 
-                placeholder='duration'>   
-                </input>
+              </div>
+                
+               
 
-                <label for='seasons'>Seasons</label>
-                    <select name='seasons' onChange={(e) => setInputActivities({...inputsActivities,season: e.target.value})}>
+               <div className={s.conteiner_input}>
+               <label className={s.title} for='seasons'>Seasons</label>
+                    <select 
+                    className={s.select}
+                    name='seasons' 
+                    onChange={(e) => setInputActivities({...inputsActivities,season: e.target.value})}
+                    >
                         <option disabled selected>Select an option</option>
                         {seasons.map(e => <option value={e}>{e}</option>)}
 
                     </select>
+               </div>
                 
 
                 
-                <label for='countries'>Paises</label>
-                <select  name='countries' onChange={(e) =>{setCountry(e.target.value)}}>
+               <div className={s.conteiner_input}>
+               <label className={s.title} for='countries'>Paises</label>
+                <select
+                className={s.select}
+                name='countries' 
+                onChange={(e) =>{setCountry(e.target.value)}}
+                >
                 <option disabled selected>Select an option</option>
                     {props.countries.map(e => <option value={e.code}  >{e.name}</option>)}
                 </select>
-                <button  onClick={(e) => { 
+               
+                <button 
+                 
+                className={`${s.input} ${s.button}`}
+                onClick={(e) => { 
                     e.preventDefault()
-                    setInputActivities({...inputsActivities,countries:[...inputsActivities.countries,country]})
+                    if(!inputsActivities.countries.includes(country)){
+                        setInputActivities({...inputsActivities,countries:[...inputsActivities.countries,country]})
+                    }
                 } 
                 }>Add Country</button>
-               
+                  
               
-                <button type="submit" onClick={() => PostActivity()}>Send</button>
+               </div>
+
+               <div className={s.conteiner_input}>
+               <button className={s.button} type="submit" onClick={(e) => PostActivity(e)}>Create Activity</button>
+               </div>
+             
             </form>
-            {bodyCountries}
-         
+
+            <div className={s.countries}>
+                   {bodyCountries.map(e => <span  className={s.span}>{e} <button value={e} onClick={(e) => DeleteCountry(e.target.value)} className={s.button_span}>x</button></span> )}
+            </div>
+
+           
         </div>
     )
 }

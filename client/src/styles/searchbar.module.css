@@ -1,0 +1,29 @@
+.input{
+    height: 40px;
+    width: 300px;
+    border: none;
+    background: none;
+    outline: none;
+    border-bottom: 1.5px solid grey;
+    font-size: 18px;
+}
+
+.button{
+    margin-top: 20px;
+    width: 70px;
+    height: 35px;
+    border: none;
+    background-color: rgb(115, 115, 169);
+    transition: 0.9s all;
+    font-size: 14px;
+}
+
+.button:hover{
+    cursor: pointer;
+}
+
+.form{
+    width: 80%;
+    float: right;
+    margin-top: 60px;
+}

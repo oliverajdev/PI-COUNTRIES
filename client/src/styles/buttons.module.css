@@ -1,0 +1,16 @@
+.container{
+    display: block;
+   
+}
+
+.button{
+    height: 40px;
+    width: 70px;
+    border: none;
+    background-color: rgb(115, 115, 169);
+    margin: 10px;
+}
+
+.button:hover{
+    cursor: pointer;
+}

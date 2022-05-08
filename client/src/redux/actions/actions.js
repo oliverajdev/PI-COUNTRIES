@@ -21,10 +21,11 @@ export const getAllCountries = () => dispatch => {
 
 
 
-export const getPagCountries = (pag) => {
+export const getPagCountries = (pag,inc) => {
     return{
             type: GET_PAG_COUNTRIES, 
-            payload: pag
+            payload: pag,
+            inc: inc
 
     }
 };

@@ -1,0 +1,54 @@
+.container_img{
+    float:left;
+    height: 600px;
+    width: 50%;
+    margin: 60px 20px 0 40px;
+   
+
+}
+
+.container_img img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.container_info{
+    margin: 60px 20px 0 40px;
+    float: left;
+    width: 15%;
+    border-right: 1.2px solid grey;
+    height: 80vh;
+
+}
+
+.name {
+    font-size: 30px;
+    text-align: left;
+   
+}
+
+.continent{
+    color: grey;
+    font-style: italic;
+    margin-bottom: 30px;
+    text-align: left;
+    font-weight: 300;
+}
+
+.container_info p{
+    text-align: left;
+    margin-bottom: 15px;
+    font-size: 17px;
+}
+
+
+.activities{
+    float: left;
+    text-align: center;
+    display: inline-block;
+    width: 25%;
+    margin-top: 60px;
+    font-size: 30px;
+}
+

@@ -1,0 +1,99 @@
+.input{
+    display: block;
+    margin: auto ;
+    transition: 0.9s all;
+
+
+}
+
+.input:hover{
+    background-color: rgba(115, 115, 169, 0.3);
+}
+
+.inputtext{
+    height: 30px;
+    width: 300px;
+    border: none;
+    background: none;
+    outline: none;
+    border-bottom: 1.5px solid grey;
+
+
+}
+
+.conteiner_input{
+    margin-bottom: 30px;
+}
+
+.form{
+    height: 100%;
+    width: 300px;
+    margin-left: 37%;
+    margin-top: 40px;
+    display: inline-block;
+}
+
+.select{
+    width: 300px;
+    border: none;
+    margin-top: 20px;
+    border-bottom: 1.5px solid grey;
+    color: grey;
+}
+
+.title{
+    text-align: start;
+    float: left;
+    font-size: 16px;
+    font-weight: 300;
+    display: inline-block;
+    margin-right: 40%;
+    width: 100px;
+
+}
+
+.button{
+    margin-top: 20px;
+    width: 150px;
+    height: 35px;
+    border: none;
+    background-color: rgb(115, 115, 169);
+    transition: 0.9s all;
+    font-size: 14px;
+    
+}
+
+.button:hover{
+    cursor: pointer;
+    background-color: rgb(92, 92, 172);
+    
+    
+
+}
+
+.countries {
+   
+    display: inline-block;
+    float: right;
+    width: 300px;
+    height: 300px;
+    margin-top: 28%;
+    margin-right: 20%;
+    
+}
+
+.span{
+    display: block;
+    text-align: start;
+}
+
+
+.button_span{
+    border: none;
+    font-size: 18px;
+    color: grey;
+}
+
+.button_span:hover{
+    cursor: pointer;
+}

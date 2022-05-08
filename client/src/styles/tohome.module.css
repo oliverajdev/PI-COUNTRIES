@@ -1,14 +1,17 @@
 .container_img{
      
     width: 90%;
-    height: 80vh;
+    height: 70vh;
     margin: auto;
+   
+   
 }
 
 .img{
     width: 100%;
     height: 100%;
     opacity: 0.85;
+ 
 }
 
 .link{
@@ -17,4 +20,9 @@
     position: relative;
     bottom: 150px;
     left: 40%
+}
+
+.pres{
+    width: 70%;
+    margin: auto;
 }

@@ -13,11 +13,12 @@ const rootReducer = (state = inicialState, action) => {
         case GET_ALL_COUNTRIES: return {
             ...state,
             paginateCountries: action.payload.slice(0,9),
+            currentPag: 0,
             countries: action.payload,
         }
         case GET_PAG_COUNTRIES: return {
             ...state,
-            paginateCountries: state.countries.slice(action.payload,action.payload+10)
+            paginateCountries: state.countries.slice(action.payload,action.payload+action.inc)
         }
         case NEXT_PAGE: return {
             ...state,
@@ -30,14 +31,16 @@ const rootReducer = (state = inicialState, action) => {
         case FILTER_COUNTRIES: return {
             ...state,
             countries: action.payload,
+            currentPag: 0,
             paginateCountries: action.payload.slice(0,9),
-            currentPag: 0
+            
         }
         case FILTER_ORDER: return {
             ...state,
             countries: action.payload,
+            currentPag: 0,
             paginateCountries: action.payload.slice(0,9),
-            currentPag: 0
+            
         }
         case COUNTRY_DETAIL: return {
             ...state,

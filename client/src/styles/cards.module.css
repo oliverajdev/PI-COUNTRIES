@@ -1,10 +1,21 @@
 .img{
-    height: 200px;
-    width: 300px;
+    height: 140px;
+    width: 240px;
     object-fit:cover
 }
 
 .cards {
     display: inline-block;
     margin: 10px;
+    height: 220px;
+    width: 240px;
+}
+
+.cont{
+    color: grey;
+    font-style: italic;
+} 
+
+.name{
+    font-weight: 500;
 }

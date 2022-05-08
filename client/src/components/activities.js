@@ -1,13 +1,17 @@
 import React from "react";
+import s from "../styles/activities.module.css"
 
 export default function Activities(props) {
     return (
-        <div>
-            <h3>Activities</h3>
-            <h5>{props.name}</h5>
-            <p>{props.difficulty}</p>
-            <p>{props.duration}</p>
-            <p>{props.season}</p>
+        
+        <div className={s.container}>
+           
+           <div className={s.info}>
+            <h5 className={s.title}>{props.name}</h5>
+            <p>Difficulty: {props.difficulty}</p>
+            <p>Duration: {props.duration}hs.</p>
+            <p>Season:{props.season}</p>
+           </div>
         </div>
     )
 }
