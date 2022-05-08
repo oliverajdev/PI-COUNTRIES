@@ -6,6 +6,7 @@ import Nav from './components/navbar';
 import  DetailCountry  from './pages/detailcountry';
 import  AddActivity from './pages/addactivity';
 
+
 function App() {
   return (
     <div className="App">
