@@ -18,8 +18,8 @@ export  function Home(props){
 
 
   const HandlerNext = () => {
- 
-      if(Math.round(props.allCountries.length/10-1) <= props.currentPag/10) return
+   
+      if(((props.allCountries.length/10)-1) <= props.currentPag/10) return
         props.NextPage()
     }
    const HandlerPrev = () => {
