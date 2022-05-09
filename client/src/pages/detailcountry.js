@@ -30,8 +30,8 @@ export function DetailCountry(props) {
             <p>Code:  {props.country.code}</p>
             
             
-            <p>Sub region:  {props.country.subRegion}</p>
-            <p>Area:  {props.country.area} m2</p>
+            <p>Sub Region:  {props.country.subRegion}</p>
+            <p>Area:  {props.country.area} km2</p>
             <p>Population:  {props.country.population} </p>
             </div>
             
@@ -41,7 +41,8 @@ export function DetailCountry(props) {
             e => 
            (
              <Activities 
-            name={e.name} 
+            name={e.name}
+            type={e.types} 
             difficulty={e.difficulty} 
             duration={e.duration} 
             season={e.season} 

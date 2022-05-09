@@ -30,7 +30,7 @@ export function AddActivity(props) {
 
     const ValidatorName = (input) => {
 
-      if(!/[a-zA-Z ]{1,60}/.test(input) && input !== '') setError('Solo debe contener letras')
+      if(!/[a-zA-Z ]{2,60}/.test(input) && input !== '') setError('No puede contener unicamente numeros')
       else setError('')
             
       setInputActivities({...inputsActivities, name: input})
@@ -38,7 +38,7 @@ export function AddActivity(props) {
 }
 const ValidatorDuration = (input) => {
   if(!/[0-9]/.test(input) && input !== '') setError('Solo acepta valores numericos')
-  else if(input > 24) setError('No debe exeder las 24 hs')
+  else if(input > 24 || input < 0) setError('No debe exeder las 24 hs')
   else setError('')
 
 

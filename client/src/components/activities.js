@@ -8,9 +8,10 @@ export default function Activities(props) {
            
            <div className={s.info}>
             <h5 className={s.title}>{props.name}</h5>
+            <p className={s.type}>{props.type}</p>
             <p>Difficulty: {props.difficulty}</p>
             <p>Duration: {props.duration}hs.</p>
-            <p>Season:{props.season}</p>
+            <p>Season: {props.season}</p>
            </div>
         </div>
     )

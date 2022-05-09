@@ -23,8 +23,7 @@ router.post('/',async (req,res,next) => {
 
      await activity.setCountries(countries)
 
-        res.status(201)
-
+      
     }catch(err){
         next(err)
     }

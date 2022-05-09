@@ -19,7 +19,9 @@ router.get('/',async (req,res,next) => {
                 }
             }
         });
-        res.status(200).json(countries)
+         res.status(200).json(countries)
+        
+        
 
     }
 
@@ -32,7 +34,7 @@ router.get('/',async (req,res,next) => {
 })
 
 router.get('/order', async (req,res,next) => {
-    const {value,continent} = req.query;
+    const {value,continent,} = req.query;
     const types = ['Recreation','Cultural','Deportivo','Natural','Health'];
     try{
         if(continent){
@@ -80,11 +82,12 @@ router.get('/order', async (req,res,next) => {
             const countries = await Country.findAll({
                 include: [{
                     model: Tourism,
-                    
-                    where: { types: types } 
+                    where: { types: value } 
                   }]
             })
             res.status(200).json(countries)
+        }else{
+            res.status(400).send('Incorrect params')
         }
     }catch(err){
         next(err)
@@ -103,7 +106,10 @@ router.get('/:idcountry',async (req,res,next) => {
             where: { code: idcountry },
             include: Tourism
           });;
-        res.status(200).json(country);
+
+        if(country) return  res.status(200).json(country);
+        else res.status(400).send('Id no match')
+       
     }catch(err){
         next(err)
     }  

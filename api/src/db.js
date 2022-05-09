@@ -52,8 +52,8 @@ allcountries.then(r =>{
            name: e.name.common,
            image: e.flags[0],
            continent: e.continents[0],
-           capital: e.capital || ["No tiene capital"],
-           subRegion: e.subregion,
+           capital: e.capital || ["Has no capital"],
+           subRegion: e.subregion || "Does not have",
            area: e.area,
            population: e.population
        })
