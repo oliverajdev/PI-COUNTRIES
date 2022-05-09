@@ -97,3 +97,7 @@
 .button_span:hover{
     cursor: pointer;
 }
+
+.error{
+    display: block;
+}

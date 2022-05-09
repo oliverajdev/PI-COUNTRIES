@@ -15,9 +15,10 @@ export function AddActivity(props) {
         props.FilterAndOrder('asc')  
     },[])
 
-    const [error, setError] = useState('');
+
     const [country, setCountry] = useState('')
     const [bodyCountries, setBodyCountries] = useState([])
+    
     const [inputsActivities, setInputActivities] = useState({
         name: '',
         types:'',
@@ -27,19 +28,30 @@ export function AddActivity(props) {
         countries: []
     })
 
+    const [error, setError] = useState({
+        errorDuration: '',
+        errorName: '',
+        errorPost: ''
+    });
+
 
     const ValidatorName = (input) => {
+        
+    
+    if(!/^[a-zA-Z\ áéíóúÁÉÍÓÚñÑ\s]*$/.test(input) && input !== '') setError({...error, errorName: 'Solamente acepta letras'})
+    else setError({...error, errorName: ''})
 
-      if(!/[a-zA-Z ]{2,60}/.test(input) && input !== '') setError('No puede contener unicamente numeros')
-      else setError('')
-            
       setInputActivities({...inputsActivities, name: input})
+     
 
 }
 const ValidatorDuration = (input) => {
-  if(!/[0-9]/.test(input) && input !== '') setError('Solo acepta valores numericos')
-  else if(input > 24 || input < 0) setError('No debe exeder las 24 hs')
-  else setError('')
+  
+   
+  if((isNaN(input))) setError({...error, errorDuration:'Solo acepta valores numericos'})
+  else if (input % 1 !== 0 || input[input.length-1] === '.') setError({...error, errorDuration:'Solo acepta valores enteros'})
+  else if(input > 24 || input < 0) setError({...error, errorDuration:'No debe exeder las 24 hs'})
+  else setError({...error, errorDuration: ''})
 
 
 setInputActivities({...inputsActivities, duration: input})
@@ -60,15 +72,18 @@ const DeleteCountry = (input) =>{
 }
 
 
-    const PostActivity = (e) => {
-      
-      if(error && error !== 'Faltan Rellenar campos') {
-          e.preventDefault()
-          return
-      }
+    const PostActivity =async  (e) => {
 
+        setError({...error,errorPost:''})
+
+    
       
-      if(!(inputsActivities.difficulty === '' || inputsActivities.duration === '' || inputsActivities.season === '' || inputsActivities.countries.length === 0)){
+        if(inputsActivities.difficulty === '' || inputsActivities.duration === '' || inputsActivities.season === '' || inputsActivities.countries.length === 0){
+            e.preventDefault()
+            setError({...error,errorPost: 'Faltan rellenar campos'})
+        }
+        
+        if(error.errorDuration === '' && error.errorName === '' && error.errorPost === ''){
         fetch('http://localhost:3001/activity', {
             method: 'POST',
             body: JSON.stringify(inputsActivities), 
@@ -77,11 +92,14 @@ const DeleteCountry = (input) =>{
             }
           }).then(res => res.json())
           .catch(error => console.error('Error:', error))
-          .then(response => console.log('Success:', response));
-      }else{
-        e.preventDefault()
-        setError('Faltan Rellenar campos')
-    } 
+          .then(response => {console.log('Success:', response)});
+        
+      
+        }else{
+            console.log(error)
+            e.preventDefault()
+            return
+        }
     
     }
 
@@ -97,7 +115,9 @@ const DeleteCountry = (input) =>{
     return(
         <div className={s.container}>
             <form className={s.form}>
-               {!error ? null : <span>{error}</span>}
+               {!error.errorName ? null : <span className={s.error}>{error.errorName}</span>}
+               {!error.errorDuration ? null : <span className={s.error}>{error.errorDuration}</span>}
+               {!error.errorPost ? null : <span className={s.error}>{error.errorPost}</span>}
               <div className={s.conteiner_input}>
               <h6 className={s.title}>Name</h6>
               <input 
