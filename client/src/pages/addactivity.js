@@ -84,6 +84,7 @@ const DeleteCountry = (input) =>{
         }
         
         if(error.errorDuration === '' && error.errorName === '' && error.errorPost === ''){
+            e.preventDefault()
         fetch('http://localhost:3001/activity', {
             method: 'POST',
             body: JSON.stringify(inputsActivities), 
@@ -91,8 +92,8 @@ const DeleteCountry = (input) =>{
               'Content-Type': 'application/json'
             }
           }).then(res => res.json())
-          .catch(error => console.error('Error:', error))
-          .then(response => {console.log('Success:', response)});
+          .then(response => {console.log('Success:', response)})
+          .catch(error => console.error('Error:', error));
         
       
         }else{
