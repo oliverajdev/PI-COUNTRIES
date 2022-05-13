@@ -101,3 +101,36 @@
 .error{
     display: block;
 }
+
+.popup{
+    height: 100px;
+    width: 400px;
+    background-color: rgba(115, 115, 169, 0.3);
+    position: absolute;
+    left: 38%;
+    bottom: 30%;
+    
+}
+
+.popup_info{
+  margin: 40px;
+  background-color: rgba(115, 115, 169, 0);
+}
+
+.popup_button{
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    right: 0;
+    border: none;
+    background-color: rgba(115, 115, 169, 0);
+    font-size: 22px;
+    font-weight: 100;
+    height: 22px;
+    margin-top: -12px;
+  
+}
+
+.popup_button:hover{
+    cursor: pointer;
+}

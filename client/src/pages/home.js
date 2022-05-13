@@ -52,6 +52,7 @@ export  function Home(props){
            {props.countries.length > 0 ? props.countries.map(
                e => (
                    <Cards
+                   key = {e.code}
                    name = {e.name}
                    img = {e.image}
                    continent = {e.continent}

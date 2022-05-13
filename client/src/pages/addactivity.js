@@ -14,9 +14,11 @@ export function AddActivity(props) {
     useEffect(() => {
         props.FilterAndOrder('asc')  
     },[])
-
-
+    
+    const [popup, setPopup] = useState('')
+ 
     const [country, setCountry] = useState('')
+
     const [bodyCountries, setBodyCountries] = useState([])
     
     const [inputsActivities, setInputActivities] = useState({
@@ -44,8 +46,8 @@ export function AddActivity(props) {
       setInputActivities({...inputsActivities, name: input})
      
 
-}
-const ValidatorDuration = (input) => {
+   }
+   const ValidatorDuration = (input) => {
   
    
   if((isNaN(input))) setError({...error, errorDuration:'Solo acepta valores numericos'})
@@ -54,67 +56,84 @@ const ValidatorDuration = (input) => {
   else setError({...error, errorDuration: ''})
 
 
-setInputActivities({...inputsActivities, duration: input})
+  setInputActivities({...inputsActivities, duration: input})
 
-}
+  }  
 
 
-const DeleteCountry = (input) =>{
+  const DeleteCountry = (input) =>{
 
-    setCountry('')
-  
+    
+
     const index = bodyCountries.findIndex( e => e === input)
- 
     setBodyCountries(bodyCountries.filter(e => e !== input))
+    console.log(bodyCountries.filter(e => e !== input))
     setInputActivities({...inputsActivities,countries: inputsActivities.countries.filter((e,i) => i !== index)})
+  
+   
 
 
-}
+  }
 
 
     const PostActivity =async  (e) => {
 
-        setError({...error,errorPost:''})
+        
 
     
       
         if(inputsActivities.difficulty === '' || inputsActivities.duration === '' || inputsActivities.season === '' || inputsActivities.countries.length === 0){
             e.preventDefault()
             setError({...error,errorPost: 'Faltan rellenar campos'})
-        }
-        
-        if(error.errorDuration === '' && error.errorName === '' && error.errorPost === ''){
+        }else{
+        setError({...error,errorPost: ''})
+        if(error.errorDuration === '' && error.errorName === ''){
             e.preventDefault()
+            
         fetch('http://localhost:3001/activity', {
             method: 'POST',
             body: JSON.stringify(inputsActivities), 
             headers:{
               'Content-Type': 'application/json'
             }
-          }).then(res => res.json())
-          .then(response => {console.log('Success:', response)})
-          .catch(error => console.error('Error:', error));
+          }).then((res) => res.json())
+          .then((response) =>  {
+              
+              const ARRAY_RESPONSE =response.filter(e => e !== null)
+              if(ARRAY_RESPONSE.length > 0){
+                  setPopup(`the following code countries could not be loaded: ${ARRAY_RESPONSE.join(' ')} `)
+              }else setPopup('Success')
+            })
+          .catch(error => console.Error('Error:', error));
         
       
         }else{
-            console.log(error)
+           
             e.preventDefault()
             return
         }
+            }
     
     }
 
-    useEffect(() => {
-        if(country){
-         const FindCountry = props.countries.find(e=> e.code === country )
-         setBodyCountries([...bodyCountries,FindCountry.name])
-        }
-         
-     },[inputsActivities.countries])
 
 
     return(
         <div className={s.container}>
+
+            {!popup ? null: 
+            <div className={s.popup} >
+                <p className={s.popup_info}>{popup}</p>
+                <button 
+                className={s.popup_button} 
+                onClick={(e) =>{
+                    setPopup('')
+
+                   
+            
+                }}>x</button>
+            </div>}
+            
             <form className={s.form}>
                {!error.errorName ? null : <span className={s.error}>{error.errorName}</span>}
                {!error.errorDuration ? null : <span className={s.error}>{error.errorDuration}</span>}
@@ -192,7 +211,7 @@ const DeleteCountry = (input) =>{
                 onChange={(e) =>{setCountry(e.target.value)}}
                 >
                 <option disabled selected>Select an option</option>
-                    {props.countries.map(e => <option value={e.code}  >{e.name}</option>)}
+                    {props.countries.map(e => <option key={e.code} value={e.code}  >{e.name}</option>)}
                 </select>
                
                 <button 
@@ -200,8 +219,12 @@ const DeleteCountry = (input) =>{
                 className={`${s.input} ${s.button}`}
                 onClick={(e) => { 
                     e.preventDefault()
-                    if(!inputsActivities.countries.includes(country)){
-                        setInputActivities({...inputsActivities,countries:[...inputsActivities.countries,country]})
+                    if(country){
+                        if(!inputsActivities.countries.includes(country)){
+                            setInputActivities({...inputsActivities,countries:[...inputsActivities.countries,country]})
+                            const FindCountry = props.countries.find(e=> e.code === country )
+                            setBodyCountries([...bodyCountries,FindCountry.name])
+                        }
                     }
                 } 
                 }>Add Country</button>
@@ -216,7 +239,7 @@ const DeleteCountry = (input) =>{
             </form>
 
             <div className={s.countries}>
-                   {bodyCountries.map(e => <span  className={s.span}>{e} <button value={e} onClick={(e) => DeleteCountry(e.target.value)} className={s.button_span}>x</button></span> )}
+                   {bodyCountries.map(e => <span key={e} className={s.span}>{e} <button value={e} onClick={(e) => DeleteCountry(e.target.value)} className={s.button_span}>x</button></span> )}
             </div>
 
            
