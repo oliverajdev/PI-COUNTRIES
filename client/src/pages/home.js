@@ -13,7 +13,9 @@ import  Filters  from "../components/filters";
 export  function Home(props){
 
     useEffect(() => {
-        props.getAllCountries()      
+       if(props.allCountries.length === 0){
+        props.getAllCountries()    
+       }  
     },[])
 
 

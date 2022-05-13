@@ -105,15 +105,15 @@
 .popup{
     height: 100px;
     width: 400px;
-    background-color: rgba(115, 115, 169, 0.3);
+    background-color: rgba(115, 115, 169, 0.9);
     position: absolute;
     left: 38%;
-    bottom: 30%;
+    bottom: 50%;
     
 }
 
 .popup_info{
-  margin: 40px;
+  margin: 25px;
   background-color: rgba(115, 115, 169, 0);
 }
 

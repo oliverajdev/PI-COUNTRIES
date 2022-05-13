@@ -38,50 +38,36 @@ export function AddActivity(props) {
 
 
     const ValidatorName = (input) => {
-        
-    
-    if(!/^[a-zA-Z\ áéíóúÁÉÍÓÚñÑ\s]*$/.test(input) && input !== '') setError({...error, errorName: 'Solamente acepta letras'})
-    else setError({...error, errorName: ''})
+       if(!/^[a-zA-Z\ áéíóúÁÉÍÓÚñÑ\s]*$/.test(input) && input !== '') setError({...error, errorName: 'Solamente acepta letras'})
+       else setError({...error, errorName: ''})
 
-      setInputActivities({...inputsActivities, name: input})
-     
-
+       setInputActivities({...inputsActivities, name: input})
    }
+
+
    const ValidatorDuration = (input) => {
-  
-   
-  if((isNaN(input))) setError({...error, errorDuration:'Solo acepta valores numericos'})
-  else if (input % 1 !== 0 || input[input.length-1] === '.') setError({...error, errorDuration:'Solo acepta valores enteros'})
-  else if(input > 24 || input < 0) setError({...error, errorDuration:'No debe exeder las 24 hs'})
-  else setError({...error, errorDuration: ''})
+       if((isNaN(input))) setError({...error, errorDuration:'Solo acepta valores numericos'})
+       else if (input % 1 !== 0 || input[input.length-1] === '.') setError({...error, errorDuration:'Solo acepta valores enteros'})
+       else if(input > 24 || input < 0) setError({...error, errorDuration:'No debe exeder las 24 hs'})
+       else setError({...error, errorDuration: ''})
 
-
-  setInputActivities({...inputsActivities, duration: input})
+       setInputActivities({...inputsActivities, duration: input})
 
   }  
 
 
   const DeleteCountry = (input) =>{
 
-    
-
     const index = bodyCountries.findIndex( e => e === input)
     setBodyCountries(bodyCountries.filter(e => e !== input))
     console.log(bodyCountries.filter(e => e !== input))
     setInputActivities({...inputsActivities,countries: inputsActivities.countries.filter((e,i) => i !== index)})
   
-   
-
-
   }
 
 
-    const PostActivity =async  (e) => {
+    const PostActivity = (e) => {
 
-        
-
-    
-      
         if(inputsActivities.difficulty === '' || inputsActivities.duration === '' || inputsActivities.season === '' || inputsActivities.countries.length === 0){
             e.preventDefault()
             setError({...error,errorPost: 'Faltan rellenar campos'})
@@ -115,8 +101,6 @@ export function AddActivity(props) {
             }
     
     }
-
-
 
     return(
         <div className={s.container}>
