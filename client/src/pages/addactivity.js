@@ -161,26 +161,28 @@ export function AddActivity(props) {
                 </div>
 
               <div className={s.conteiner_input}>
-              <label className={s.title} for='seasons'>Type</label>
+              <label className={s.title} >Type</label>
                     <select 
                     className={s.select}
                     name='seasons' 
                     onChange={(e) => setInputActivities({...inputsActivities,types: e.target.value})}
+                    defaultValue=''
                     >
-                        <option disabled selected>Select an option</option>
+                        <option disabled value=''>Select an option</option>
                         {types.map(e => <option value={e}>{e}</option>)}
 
                     </select>
               </div>
 
               <div className={s.conteiner_input}>
-              <label  className={s.title} for='dififculty'>Difficulty</label>
+              <label  className={s.title} >Difficulty</label>
                     <select 
                     className={s.select}
                     name='difficulty' 
                     onChange={(e) => setInputActivities({...inputsActivities,difficulty: e.target.value})}
+                    defaultValue=''
                     >
-                        <option disabled selected>Select an option</option>
+                        <option disabled value=''>Select an option</option>
                         {difficulty.map(e => <option value={e}>{e}</option>)}
 
                     </select>
@@ -189,13 +191,14 @@ export function AddActivity(props) {
                
 
                <div className={s.conteiner_input}>
-               <label className={s.title} for='seasons'>Seasons</label>
+               <label className={s.title} >Seasons</label>
                     <select 
                     className={s.select}
                     name='seasons' 
                     onChange={(e) => setInputActivities({...inputsActivities,season: e.target.value})}
+                    defaultValue=''
                     >
-                        <option disabled selected>Select an option</option>
+                        <option disabled value=''>Select an option</option>
                         {seasons.map(e => <option value={e}>{e}</option>)}
 
                     </select>
@@ -204,13 +207,14 @@ export function AddActivity(props) {
 
                 
                <div className={s.conteiner_input}>
-               <label className={s.title} for='countries'>Paises</label>
+               <label className={s.title} >Paises</label>
                 <select
                 className={s.select}
                 name='countries' 
                 onChange={(e) =>{setCountry(e.target.value)}}
+                defaultValue=''
                 >
-                <option disabled selected>Select an option</option>
+                <option value='' >Select an option</option>
                     {props.countries.map(e => <option key={e.code} value={e.code}  >{e.name}</option>)}
                 </select>
                
