@@ -3,9 +3,11 @@ export const GET_PAG_COUNTRIES = 'GET_PAG_COUNTRIES'
 export const NEXT_PAGE = 'NEXT_PAGE'
 export const PREVIOUS_PAGE = 'PREVIOUS_PAGE'
 export const FILTER_COUNTRIES = 'FILTER_COUNTRIES'
-export const FILTER_ORDER = 'FILTER_ORDER'
+export const ORDER = 'ORDER'
 export const COUNTRY_DETAIL = 'COUNTRY_DETAIL'
 export const FILTER_BY_ACTIVITIES = 'FILTER_BY_ACTIVITIES'
+export const FILTER_ASC = 'FILTER_ASC'
+export const FILTER_DESC = 'FILTER_DESC'
 
 
 export const getAllCountries = () => dispatch => {
@@ -58,7 +60,7 @@ export const FilterCountries = (name) => dispatch => {
 }
 
 
-export const FilterAndOrder = (value,cont) => dispatch => {
+export const Order = (value,cont) => dispatch => {
     var result ;
     if(value !== null) result = `?value=${value}`;
     else result = `?continent=${cont}`;
@@ -66,10 +68,24 @@ export const FilterAndOrder = (value,cont) => dispatch => {
     .then(response => response.json())
     .then(json =>{
         dispatch({
-            type: FILTER_ORDER,
+            type: ORDER,
             payload: json
         })
     })
+}
+
+export const FilterAsc = (payload) => {
+    return {
+        type: FILTER_ASC,
+        payload:payload
+    }
+}
+
+export const FilterDesc = (payload) => {
+    return {
+        type: FILTER_DESC,
+        payload:payload
+    }
 }
 
 

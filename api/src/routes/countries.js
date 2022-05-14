@@ -45,39 +45,6 @@ router.get('/order', async (req,res,next) => {
             })
             res.status(200).json(countries)
 
-        }
-        else if(value === 'asc'){
-            const countries = await Country.findAll({
-                order: [
-                    ['name', 'ASC']
-                ]
-            })
-
-            res.status(200).json(countries)
-        }else if(value === 'desc'){
-            const countries = await Country.findAll({
-                order: [
-                    ['name', 'DESC']
-                ]
-            })
-
-            res.status(200).json(countries)
-
-        }else if(value === 'popasc'){
-            const countries = await Country.findAll({
-                order: [
-                    ['population', 'ASC']
-                ]
-            })
-            res.status(200).json(countries)
-
-        }else if(value === 'popdesc'){
-            const countries = await Country.findAll({
-                order: [
-                    ['population', 'desc']
-                ]
-            })
-            res.status(200).json(countries)
         }else if(types.includes(value)){
             const countries = await Country.findAll({
                 include: [{

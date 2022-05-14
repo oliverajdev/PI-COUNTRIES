@@ -1,4 +1,4 @@
-import {COUNTRY_DETAIL, FILTER_ORDER, FILTER_COUNTRIES, GET_ALL_COUNTRIES,GET_PAG_COUNTRIES, NEXT_PAGE, PREVIOUS_PAGE} from "../actions/actions"
+import {COUNTRY_DETAIL, ORDER, FILTER_COUNTRIES, GET_ALL_COUNTRIES,GET_PAG_COUNTRIES, NEXT_PAGE, PREVIOUS_PAGE, FILTER_DESC, FILTER_ASC} from "../actions/actions"
 
 const inicialState = {
     countries : [],
@@ -35,7 +35,7 @@ const rootReducer = (state = inicialState, action) => {
             paginateCountries: action.payload.slice(0,9),
             
         }
-        case FILTER_ORDER: return {
+        case ORDER: return {
             ...state,
             countries: action.payload,
             currentPag: 0,
@@ -49,6 +49,26 @@ const rootReducer = (state = inicialState, action) => {
         case COUNTRY_DETAIL: return {
             ...state,
             country: action.payload
+        }
+        case FILTER_ASC: return {
+            ...state,
+            countries: state.countries.sort((a,b) =>{
+                if(a[action.payload] < b[action.payload]) return -1;
+                if(a[action.payload] > b[action.payload]) return 1;
+                return 0;
+            }),
+            currentPag: 0,
+            paginateCountries: state.countries.slice(0,9),
+        }
+        case FILTER_DESC: return {
+            ...state,
+            countries: state.countries.sort((a,b) =>{
+                if(a[action.payload] < b[action.payload]) return 1;
+                if(a[action.payload] > b[action.payload]) return -1;
+                return 0;
+            }),
+            currentPag: 0,
+            paginateCountries: state.countries.slice(0,9),
         }
         default: return {
             ...state,

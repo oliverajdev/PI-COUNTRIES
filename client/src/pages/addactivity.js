@@ -1,5 +1,5 @@
 import React from "react";
-import { FilterAndOrder } from "../redux/actions/actions";
+import { FilterAsc } from "../redux/actions/actions";
 import { connect } from "react-redux";
 import { useEffect } from "react"
 import { useState } from "react";
@@ -12,7 +12,7 @@ export function AddActivity(props) {
     const difficulty = [1,2,3,4,5]
 
     useEffect(() => {
-        props.FilterAndOrder('asc')  
+        props.FilterAsc('name')  
     },[])
     
     const [popup, setPopup] = useState('')
@@ -244,7 +244,7 @@ export const mapStateToProps = function(state){
 
 export const mapDispatchToProps = function(dispatch){
     return {
-        FilterAndOrder: (value) => dispatch(FilterAndOrder(value)),
+        FilterAsc: (payload) => dispatch(FilterAsc(payload)),
          }
 
 };
