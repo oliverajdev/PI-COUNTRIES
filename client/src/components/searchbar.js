@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { FilterCountries } from "../redux/actions/actions";
+import { Search } from "../redux/actions/actions";
 import s from "../styles/searchbar.module.css"
 
 export function SearchBar(props) {
     const [country,setCountry] = useState("");
   return (
     <form className={s.form} onSubmit={(e) => {
+
       e.preventDefault();
-      props.FilterCountries(country);
+      props.Search(country);
       setCountry("")
     }}>
       <input
@@ -32,9 +33,12 @@ export function SearchBar(props) {
 
 
 
+
+
 export const mapDispatchToProps = function(dispatch){
   return {
-      FilterCountries: (name) => dispatch(FilterCountries(name)),
+      Search: (name) => dispatch(Search(name)),
+
 
        }
 

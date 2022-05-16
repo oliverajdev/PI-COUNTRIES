@@ -10,13 +10,21 @@ import  Filters  from "../components/filters";
 
 
 
+
+
 export  function Home(props){
+
+    
+
+    
 
     useEffect(() => {
        if(props.allCountries.length === 0){
         props.getAllCountries()    
-       }  
+       } 
+    
     },[])
+    
 
 
   const HandlerNext = () => {
@@ -28,12 +36,15 @@ export  function Home(props){
        if(props.currentPag === 0) return
        props.PrevPage()
     }
-    useEffect(() => {
     
+    useEffect(() => {
+       
        if(props.currentPag === 0) props.getPagCountries(props.currentPag,9)
        else props.getPagCountries(props.currentPag,10)
+     
 
     },[props.currentPag])
+  
 
 
     
@@ -41,6 +52,7 @@ export  function Home(props){
      
     return(
        <div className={s.container}>
+           
           
            <SearchBar/>
 
@@ -64,7 +76,7 @@ export  function Home(props){
            ): <span>No se encontraron resultados</span>}
             
            </div>
-           <Buttons HandlerNext={HandlerNext} HandlerPrev={HandlerPrev}/>
+           <Buttons  HandlerNext={HandlerNext} HandlerPrev={HandlerPrev}  />
           
  
        </div>
@@ -77,6 +89,7 @@ export const mapStateToProps = function(state){
         allCountries: state.countries,
         countries: state.paginateCountries,
         currentPag: state.currentPag,
+        search: state.search
     }
 };
 

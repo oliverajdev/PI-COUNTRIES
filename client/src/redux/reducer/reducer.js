@@ -1,7 +1,8 @@
-import {COUNTRY_DETAIL, ORDER, FILTER_COUNTRIES, GET_ALL_COUNTRIES,GET_PAG_COUNTRIES, NEXT_PAGE, PREVIOUS_PAGE, FILTER_DESC, FILTER_ASC} from "../actions/actions"
+import {COUNTRY_DETAIL, ORDER, FILTER_COUNTRIES, GET_ALL_COUNTRIES,GET_PAG_COUNTRIES, NEXT_PAGE, PREVIOUS_PAGE, FILTER_DESC, FILTER_ASC, SEARCH,} from "../actions/actions"
 
 const inicialState = {
     countries : [],
+    search: [],
     country: {},
     paginateCountries: [],
     currentPag: 0,
@@ -28,13 +29,7 @@ const rootReducer = (state = inicialState, action) => {
             ...state,
             currentPag: state.currentPag-10
         }
-        case FILTER_COUNTRIES: return {
-            ...state,
-            countries: action.payload,
-            currentPag: 0,
-            paginateCountries: action.payload.slice(0,9),
-            
-        }
+
         case ORDER: return {
             ...state,
             countries: action.payload,
@@ -49,6 +44,12 @@ const rootReducer = (state = inicialState, action) => {
         case COUNTRY_DETAIL: return {
             ...state,
             country: action.payload
+        }
+        case SEARCH: return {
+            ...state,
+            countries: action.payload,
+            currentPag: 0,
+            paginateCountries: action.payload.slice(0,9),
         }
         case FILTER_ASC: return {
             ...state,

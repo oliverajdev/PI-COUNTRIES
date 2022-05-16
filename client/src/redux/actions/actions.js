@@ -8,6 +8,7 @@ export const COUNTRY_DETAIL = 'COUNTRY_DETAIL'
 export const FILTER_BY_ACTIVITIES = 'FILTER_BY_ACTIVITIES'
 export const FILTER_ASC = 'FILTER_ASC'
 export const FILTER_DESC = 'FILTER_DESC'
+export const  SEARCH= 'SEARCH'
 
 
 export const getAllCountries = () => dispatch => {
@@ -48,12 +49,12 @@ export const PrevPage = () => {
 }
 
 
-export const FilterCountries = (name) => dispatch => {
+export const Search = (name) => dispatch => {
     return fetch(`http://localhost:3001/countries?name=${name}`)
     .then(response => response.json())
     .then(json =>{ 
         dispatch({
-            type: FILTER_COUNTRIES,
+            type: SEARCH,
             payload: json
         })
     })
@@ -87,6 +88,7 @@ export const FilterDesc = (payload) => {
         payload:payload
     }
 }
+
 
 
 
