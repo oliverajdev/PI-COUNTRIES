@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from 'react-redux';
 import Cards from "../components/cards"
 import { useEffect } from "react"
-import { getPagCountries, NextPage, PrevPage, getAllCountries } from "../redux/actions/actions";
-import { Buttons } from "../components/buttons";
+import { getUrl } from "../redux/actions/actions";
+import  Buttons  from "../components/buttons";
 import SearchBar from "../components/searchbar";
 import s from "../styles/home.module.css"
 import  Filters  from "../components/filters";
@@ -19,31 +19,10 @@ export  function Home(props){
     
 
     useEffect(() => {
-       if(props.allCountries.length === 0){
-        props.getAllCountries()    
-       } 
+        props.getUrl(0,9)    
     
     },[])
-    
 
-
-  const HandlerNext = () => {
-   
-      if(((props.allCountries.length/10)-1) <= props.currentPag/10) return
-        props.NextPage()
-    }
-   const HandlerPrev = () => {
-       if(props.currentPag === 0) return
-       props.PrevPage()
-    }
-    
-    useEffect(() => {
-       
-       if(props.currentPag === 0) props.getPagCountries(props.currentPag,9)
-       else props.getPagCountries(props.currentPag,10)
-     
-
-    },[props.currentPag])
   
 
 
@@ -76,7 +55,7 @@ export  function Home(props){
            ): <span>No se encontraron resultados</span>}
             
            </div>
-           <Buttons  HandlerNext={HandlerNext} HandlerPrev={HandlerPrev}  />
+           <Buttons/>
           
  
        </div>
@@ -86,19 +65,17 @@ export  function Home(props){
 
 export const mapStateToProps = function(state){
     return {
-        allCountries: state.countries,
-        countries: state.paginateCountries,
-        currentPag: state.currentPag,
-        search: state.search
+
+        countries: state.countries,
+        page: state.page,
+        size: state.size
     }
 };
 
 export const mapDispatchToProps = function(dispatch){
     return {
-        getPagCountries: (pag,inc) => dispatch(getPagCountries(pag,inc)),
-        getAllCountries: () => dispatch(getAllCountries()),
-        NextPage: () => dispatch(NextPage()),
-        PrevPage: () => dispatch(PrevPage())
+        getUrl: (pageq,sizeq) => dispatch(getUrl(null,null,null,pageq,sizeq)),
+       
          }
 
 };

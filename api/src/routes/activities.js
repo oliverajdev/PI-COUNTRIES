@@ -48,4 +48,32 @@ router.post('/',async (req,res,next) => {
 })
 
 
+router.put('/update/:id', async (req,res,next) => {
+  const id = req.params.code;
+  const {name,type,duration,difficulty,season} = req.query;
+  try{
+      if(id){
+        const update = await   Tourism.update({
+               name:name,
+               type:type,
+               duration: duration,
+               difficulty:difficulty,
+               season:season
+           },{
+               where: {
+                   id: id
+               }
+           })
+           res.status(201).json(update);
+      }
+  }catch(err){
+      next(err)
+
+  }
+})
+
+
+router.delete('/delete')
+
+
 module.exports = router;

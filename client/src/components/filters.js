@@ -1,63 +1,75 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Order,  getAllCountries, FilterAsc, FilterDesc } from "../redux/actions/actions";
+import {  getUrl, setPage } from "../redux/actions/actions";
 import s from "../styles/filters.module.css"
+import { useEffect } from "react";
 
 
 
 export function Filters(props) {
+
+  useEffect(() => {
+    if(props.page === 0) props.setPage(-props.current)
+  }, [props.page]);
     return(
         <div className={s.container}>
           <div>
           <h4 className={s.title} >Get all</h4>
           <ul className={s.ul_list}>
-            <li onClick={() => props.getAllCountries()}>all</li>
+            <li onClick={() => props.getUrl()}>all</li>
           </ul>
           <h4 className={s.title}>By continent</h4>
             <ul className={s.ul_list}>
 
-                <li onClick={() => props.Order(null,'South America')} >South America</li>
-                <li onClick={() => props.Order(null,'North America')} >North America</li>
-                <li onClick={() => props.Order(null,'Africa')} >Africa</li>
-                <li onClick={() => props.Order(null, 'Asia')} >Asia </li>
-                <li onClick={() => props.Order(null, 'Europe')} >Europe</li>
-                <li onClick={() => props.Order(null, 'Oceania')} >Oceania</li>
-                <li onClick={() => props.Order(null, 'Antarctica')} >Antarctica</li>
+                <li onClick={() => props.getUrl('continent,South America')} >South America</li>
+                <li onClick={() => props.getUrl('continent,North America')} >North America</li>
+                <li onClick={() => props.getUrl('continent,Africa')} >Africa</li>
+                <li onClick={() => props.getUrl( 'continent,Asia')} >Asia </li>
+                <li onClick={() => props.getUrl( 'continent,Europe')} >Europe</li>
+                <li onClick={() => props.getUrl( 'continent,Oceania')} >Oceania</li>
+                <li onClick={() => props.getUrl( 'continent,Antarctica')} >Antarctica</li>
             </ul>
             <h4 className={s.title}>By Activities</h4>
             <ul className={s.ul_list}>
-               <li onClick={() => props.Order('Recreation')} >Recreation</li>
-               <li onClick={() => props.Order('Cultural')} >Cultural</li>
-               <li onClick={() => props.Order('Deportivo')} >Deportivo</li>
-               <li onClick={() => props.Order('Natural')} >Natural</li>
-               <li onClick={() => props.Order('Health')} >Health</li>
+               <li onClick={() => props.getUrl( 'Tourism,Recreation')} >Recreation</li>
+               <li onClick={() => props.getUrl( 'Tourism,Cultural')} >Cultural</li>
+               <li onClick={() => props.getUrl( 'Tourism,Deportivo')} >Deportivo</li>
+               <li onClick={() => props.getUrl( 'Tourism,Natural')} >Natural</li>
+               <li onClick={() => props.getUrl( 'Tourism,Health')} >Health</li>
             </ul>
             <h4 className={s.title}>By Alphabetical order</h4>
             <ul className={s.ul_list}>
-               <li onClick={() => props.FilterAsc('name')}>ascedent </li>
-               <li onClick={() => props.FilterDesc('name')}>desendent</li>
+               <li onClick={() => props.getUrl(props.continent,'name,ASC',)}>ascedent </li>
+               <li onClick={() => props.getUrl(props.continent,'name,DESC')}>desendent</li>
             </ul>
             <h4 className={s.title}>By population</h4>
             <ul className={s.ul_list}>
-               <li onClick={() => props.FilterAsc('population')} >ascedent</li>
-               <li onClick={() => props.FilterDesc('population')} >desendent</li>
+               <li onClick={() => props.getUrl(props.continent,'population,ASC')} >ascedent</li>
+               <li onClick={() => props.getUrl(props.continent,'population,DESC')} >desendent</li>
             </ul>
           </div>
         </div>
     )
 }
 
+export const mapStateToProps = function(state){
+  return {
+
+      continent: state.continent,
+      page: state.page,
+      size: state.size,
+      current: state.current
+  }
+};
 
 
 export const mapDispatchToProps = function(dispatch){
     return {
-        Order: (value,cont) => dispatch(Order(value,cont)),
-        FilterAsc: (payload) => dispatch(FilterAsc(payload)),
-        FilterDesc: (payload) => dispatch(FilterDesc(payload)),
-        getAllCountries: () => dispatch(getAllCountries())
+        getUrl: (orderq,filterq) => dispatch(getUrl(null,orderq,filterq)),
+        setPage: (current) => dispatch(setPage(current))
   
          }
   
   };
   
-  export default connect(null,mapDispatchToProps)(Filters)
+  export default connect(mapStateToProps,mapDispatchToProps)(Filters)

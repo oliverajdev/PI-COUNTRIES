@@ -1,17 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { CountryDetail } from "../redux/actions/actions";
+import { getDetail } from "../redux/actions/actions";
 import { useEffect } from "react";
 import  Activities  from "../components/activities";
 import s from "../styles/detailcountry.module.css"
 
 export function DetailCountry(props) {
-
+   
     const {code} = useParams();
     
     useEffect(() => {
-        props.CountryDetail(code)
+        props.getDetail(code)
       
     }, []);
 
@@ -65,7 +65,7 @@ export const mapStateToProps = function(state){
 
 export const mapDispatchToProps = function(dispatch){
     return {
-        CountryDetail: (code) => dispatch(CountryDetail(code)),
+        getDetail: (code) => dispatch(getDetail(code)),
        
          }
 

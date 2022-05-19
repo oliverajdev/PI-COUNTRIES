@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Search } from "../redux/actions/actions";
+import { getUrl } from "../redux/actions/actions";
 import s from "../styles/searchbar.module.css"
 
 export function SearchBar(props) {
@@ -8,8 +8,9 @@ export function SearchBar(props) {
   return (
     <form className={s.form} onSubmit={(e) => {
 
+      
+      props.getUrl(country,props.continent,props.filter);
       e.preventDefault();
-      props.Search(country);
       setCountry("")
     }}>
       <input
@@ -32,16 +33,20 @@ export function SearchBar(props) {
 }
 
 
+export const mapStateToProps = function(state){
+  return {
 
+      continent: state.continent,
+      filter: state.filter,
+  }
+};
 
 
 export const mapDispatchToProps = function(dispatch){
   return {
-      Search: (name) => dispatch(Search(name)),
-
-
+      getUrl: (search,orderq,filterq) => dispatch(getUrl(search,orderq,filterq)),
        }
 
 };
 
-export default connect(null,mapDispatchToProps)(SearchBar);
+export default connect(mapStateToProps,mapDispatchToProps)(SearchBar);

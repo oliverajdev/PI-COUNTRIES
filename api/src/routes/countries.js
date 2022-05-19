@@ -1,70 +1,9 @@
 const { Router } = require('express');
 const { Country, Tourism } = require('../db.js');
-const { Op } = require('sequelize');
+const { Op, or } = require('sequelize');
 
 
 const router = Router();
-
-router.get('/',async (req,res,next) => {
-    const {name} = req.query;
-
-   try{
-
-    if(name){
-
-        const countries = await Country.findAll({
-            where:{
-                name:{
-                    [Op.iLike]: `%${name}%`
-                }
-            }
-        });
-         res.status(200).json(countries)
-        
-        
-
-    }
-
-       const countries = await Country.findAll();
-        res.status(200).json(countries)
-
-   }catch(err){
-       next(err)
-   }    
-})
-
-router.get('/order', async (req,res,next) => {
-    const {value,continent,} = req.query;
-    const types = ['Recreation','Cultural','Deportivo','Natural','Health'];
-    try{
-        if(continent){
-            const countries = await Country.findAll({
-                where:{
-                    continent: [continent]
-                }
-            })
-            res.status(200).json(countries)
-
-        }else if(types.includes(value)){
-            const countries = await Country.findAll({
-                include: [{
-                    model: Tourism,
-                    where: { types: value } 
-                  }]
-            })
-            res.status(200).json(countries)
-        }else{
-            res.status(400).send('Incorrect params')
-        }
-    }catch(err){
-        next(err)
-    }
-})
-
-
-
-
-
 
 router.get('/:idcountry',async (req,res,next) => {
     const idcountry = req.params.idcountry;
@@ -80,6 +19,132 @@ router.get('/:idcountry',async (req,res,next) => {
     }catch(err){
         next(err)
     }  
+})
+
+
+router.get('/',async (req,res,next) => {
+    const {search,orderq,filterq,page,size} = req.query;
+    var order = null;
+    var filter = [null,null]
+    if(filterq) {
+        filter = filterq.split(',')
+        order = 'order'
+    }
+    if(orderq) var orderc = orderq.split(',')
+    
+    try{
+        if(!orderq){
+            if(search){
+                
+                const countries = await Country.findAndCountAll({
+                    where:{
+                        name:{
+                              [Op.iLike]: `%${search}%`
+                            },
+                        },
+                    [order] :[ [filter[0],filter[1]]],
+                    limit:size,
+                    offset: page*size,
+                })
+                
+                res.status(200).json(countries)
+
+            }
+            
+            const countries = await Country.findAndCountAll({
+                [order] :[ [filter[0],filter[1]]],
+                limit:size,
+                offset: page*size,
+            })
+            
+            res.status(200).json(countries)
+        }
+        else{
+
+            if(orderc[0] === 'continent' ){
+               
+                if(search){
+                    const countries = await Country.findAndCountAll({
+                        
+                        where:{
+                            [orderc[0]] : orderc[1],
+                            name:{
+                                  [Op.iLike]: `%${search}%`
+                                },
+
+        
+                        },
+                       [order] :[ [filter[0],filter[1]]],
+                       limit:size,
+                       offset: page*size,
+                      
+        
+                    })
+                
+                    res.status(200).json(countries)
+                   }else{
+                    const countries = await Country.findAndCountAll({
+                        where:{
+                            [orderc[0]] : orderc[1],
+        
+                        },
+                       [order] :[ [filter[0],filter[1]]],
+                       limit:size,
+                       offset: page*size,
+        
+                    })
+                
+                    res.status(200).json(countries)
+                   }
+                }
+
+               if(orderc[0] === 'Tourism' ){
+               
+                if(!search){
+                    const countries = await Country.findAndCountAll({
+                        include: [{
+                            model: Tourism,
+                            where: { types: orderc[1] } 
+                          }],
+    
+                          [order] :[ [filter[0],filter[1]]],
+                          limit:size,
+                          offset: page*size,
+                    })
+                
+                    res.status(200).json(countries)
+
+                }else{
+                    const countries = await Country.findAndCountAll({
+                        where:{
+                            name:{
+                                  [Op.iLike]: `%${search}%`
+                                }
+        
+                        },
+                        include: [{
+                            model: Tourism,
+                            where: { types: orderc[1] } 
+                          }],
+    
+                          [order] :[ [filter[0],filter[1]]],
+                          limit:size,
+                          offset: page*size,
+                    })
+                
+                    res.status(200).json(countries)
+                }
+               }
+
+            
+            
+          
+
+        }
+       
+    }catch(err){
+        next(err)
+    }
 })
 
 
