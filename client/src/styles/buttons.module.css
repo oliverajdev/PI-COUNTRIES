@@ -7,8 +7,9 @@
     height: 40px;
     width: 70px;
     border: none;
-    background-color: rgb(115, 115, 169);
+    color: rgb(115, 115, 169);
     margin: 20px;
+    font-size: 20px;
 }
 
 .button:hover{

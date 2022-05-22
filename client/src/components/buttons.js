@@ -2,7 +2,9 @@ import React from "react";
 import s from "../styles/buttons.module.css"
 import { getUrl, setPage } from "../redux/actions/actions";
 import { connect } from "react-redux";
-
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export function Buttons(props){
 
@@ -26,9 +28,9 @@ export function Buttons(props){
         <div className={s.container}>
           
             
-        <button className={s.button} onClick={() => HandlerPrev()} >Prev</button>
+        <button className={s.button} onClick={() => HandlerPrev()} ><FontAwesomeIcon icon={faArrowLeft}/></button>
       
-        <button className={s.button}  onClick={() => HandlerNext()}>Next</button>
+        <button className={s.button}  onClick={() => HandlerNext()}><FontAwesomeIcon icon={faArrowRight}/></button>
         </div>
     )
 }

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { getUrl } from "../redux/actions/actions";
 import s from "../styles/searchbar.module.css"
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export function SearchBar(props) {
     const [country,setCountry] = useState("");
@@ -20,13 +22,9 @@ export function SearchBar(props) {
         value={country}
         onChange={(e) => setCountry(e.target.value)}
       />
-      <input 
-      className={s.button}  
-      type="submit" 
-      value="Search"
-      />
-    
-    </form>
+     <button className={s.button} type="submit"><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
+   
+     </form>
     
     
   );

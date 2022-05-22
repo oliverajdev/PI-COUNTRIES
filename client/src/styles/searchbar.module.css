@@ -11,12 +11,12 @@
 
 .button{
     margin-top: 20px;
-    width: 70px;
+    width: 40px;
     height: 35px;
     border: none;
-    background-color: rgb(115, 115, 169);
+    color: rgb(115, 115, 169);
     transition: 0.9s all;
-    font-size: 14px;
+    font-size: 20px;
 }
 
 .button:hover{
