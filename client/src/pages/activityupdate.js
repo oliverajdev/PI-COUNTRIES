@@ -74,7 +74,7 @@ export function ActivityUpdate(props) {
     
     if(error.errorDuration === '' && error.errorName === ''){    
         
-    fetch(`http://localhost:3001/activity/update/${id}`, {
+    fetch(`${baseUrl}/activity/update/${id}`, {
         method: 'PUT',
         body: JSON.stringify(inputsActivities), 
         headers:{

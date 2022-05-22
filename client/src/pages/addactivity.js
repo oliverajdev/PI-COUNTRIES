@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { useEffect } from "react"
 import { useState } from "react";
 import s from "../styles/addactivity.module.css"
+import { baseUrl } from "..";
+
 
 export function AddActivity(props) {
 
@@ -81,7 +83,7 @@ export function AddActivity(props) {
         if(error.errorDuration === '' && error.errorName === ''){
             e.preventDefault()
             
-        fetch('http://localhost:3001/activity', {
+        fetch(`${baseUrl}/activity`, {
             method: 'POST',
             body: JSON.stringify(inputsActivities), 
             headers:{
