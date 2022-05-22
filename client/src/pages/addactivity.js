@@ -83,7 +83,7 @@ export function AddActivity(props) {
         if(error.errorDuration === '' && error.errorName === ''){
             e.preventDefault()
             
-        fetch(`${baseUrl}/activity`, {
+        fetch(`${baseUrl}/activityg`, {
             method: 'POST',
             body: JSON.stringify(inputsActivities), 
             headers:{

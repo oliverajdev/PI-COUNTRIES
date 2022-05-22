@@ -25,6 +25,7 @@
 .name {
     font-size: 30px;
     text-align: left;
+    color: white;
    
 }
 
@@ -40,6 +41,7 @@
     text-align: left;
     margin-bottom: 15px;
     font-size: 17px;
+    color: white;
 }
 
 
@@ -50,5 +52,6 @@
     width: 25%;
     margin-top: 60px;
     font-size: 30px;
+    color: white;
 }
 
