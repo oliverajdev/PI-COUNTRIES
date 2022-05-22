@@ -37,12 +37,14 @@ export  function Home(props){
            
           
            <SearchBar/>
+          
 
            <div className={s.filters}>
+               
                <Filters/>
            </div>
 
-          
+           <Buttons/>
            <div className={s.cards}>
               
            {(props.countries.length > 0 ? props.countries.map(
@@ -62,7 +64,7 @@ export  function Home(props){
            ): <span>No se encontraron resultados</span>)}
             
            </div>
-           <Buttons/>
+
           
  
        </div>

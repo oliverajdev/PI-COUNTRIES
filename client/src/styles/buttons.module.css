@@ -1,5 +1,5 @@
 .container{
-    display: block;
+    display: inline-block;
    
 }
 
@@ -8,7 +8,7 @@
     width: 70px;
     border: none;
     background-color: rgb(115, 115, 169);
-    margin: 10px;
+    margin: 20px;
 }
 
 .button:hover{

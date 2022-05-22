@@ -219,7 +219,7 @@ export function AddActivity(props) {
                     if(country){
                         if(!inputsActivities.countries.includes(country)){
                             setInputActivities({...inputsActivities,countries:[...inputsActivities.countries,country]})
-                            const FindCountry = props.countries.find(e=> e.code === country )
+                            const FindCountry = props.list.find(e=> e.code === country )
                             setBodyCountries([...bodyCountries,FindCountry.name])
                         }
                     }
