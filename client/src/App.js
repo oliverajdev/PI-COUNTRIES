@@ -5,7 +5,7 @@ import Home from './pages/home'
 import Nav from './components/navbar';
 import  DetailCountry  from './pages/detailcountry';
 import  AddActivity from './pages/addactivity';
-import  ActivitiesList  from './pages/activitieslist';
+import  ActivitiesList  from './pages/activitiesllist';
 import { ActivityUpdate } from './pages/activityupdate';
 import  Favorites  from './pages/favorites';
 
