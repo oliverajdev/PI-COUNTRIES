@@ -31,7 +31,7 @@
 .form{
     height: 100%;
     width: 300px;
-    margin-left: 37%;
+    margin:auto;
     margin-top: 40px;
     display: inline-block;
 }
@@ -64,7 +64,6 @@
     background-color: rgb(115, 115, 169);
     transition: 0.9s all;
     font-size: 14px;
-    color: black;
     
 }
 
@@ -76,22 +75,8 @@
 
 }
 
-.countries {
-   
-    display: inline-block;
-    float: right;
-    width: 300px;
-    height: 300px;
-    margin-top: 20%;
-    margin-right: 20%;
-    
-}
 
-.span{
-    display: block;
-    text-align: start;
-    color: white;
-}
+
 
 
 .button_span{
@@ -136,6 +121,7 @@
     height: 22px;
     margin-top: -12px;
     text-decoration: none;
+  
 }
 
 .popup_button:hover{

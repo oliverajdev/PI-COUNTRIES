@@ -11,8 +11,9 @@ export default function Nav(){
         <div className={s.container}>
             <ul className={s.ul_list}>
                 <li><NavLink className={(navData) => navData.isActive ? s.activelink : s.link }  to='/home'>Home</NavLink></li>
-                
+                <li><NavLink className={(navData) => navData.isActive ? s.activelink : s.link } to='/activities'>Activities</NavLink></li>
                 <li><NavLink className={(navData) => navData.isActive ? s.activelink : s.link } to='/addactivity'>Add Activity</NavLink></li>
+                <li><NavLink className={(navData) => navData.isActive ? s.activelink : s.link } to='/favorites'>Favorites</NavLink></li>
             </ul>
         </div>
     

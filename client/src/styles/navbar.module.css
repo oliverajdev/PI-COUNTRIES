@@ -4,6 +4,7 @@
   height: 100%;
   margin: auto;
   font-size: 19px;
+ 
   
 
 }
@@ -22,6 +23,7 @@
   transition: 0.9s all;
   height: 100%;
   width: 100%;
+  color: rgb(255, 246, 246);
 
  
 }
@@ -41,6 +43,7 @@
   height: 100%;
   width: 100%;
   border-bottom: 1.2px solid  rgb(115, 115, 169);
+
 }
 
 .activelink:hover{

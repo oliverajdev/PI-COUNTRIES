@@ -1,5 +1,5 @@
 import React from "react";
-import { getUrl } from "../redux/actions/actions";
+import { getList} from "../redux/actions/actions";
 import { connect } from "react-redux";
 import { useEffect } from "react"
 import { useState } from "react";
@@ -12,9 +12,13 @@ export function AddActivity(props) {
     const difficulty = [1,2,3,4,5]
 
     useEffect(() => {
-        props.getUrl('name,ASC')  
+        props.getList()  
+     
     },[])
+
+   
     
+  
     const [popup, setPopup] = useState('')
  
     const [country, setCountry] = useState('')
@@ -68,6 +72,7 @@ export function AddActivity(props) {
 
     const PostActivity = (e) => {
 
+      if(popup === ''){
         if(inputsActivities.difficulty === '' || inputsActivities.duration === '' || inputsActivities.season === '' || inputsActivities.countries.length === 0){
             e.preventDefault()
             setError({...error,errorPost: 'Faltan rellenar campos'})
@@ -85,10 +90,12 @@ export function AddActivity(props) {
           }).then((res) => res.json())
           .then((response) =>  {
               
-              const ARRAY_RESPONSE =response.filter(e => e !== null)
-              if(ARRAY_RESPONSE.length > 0){
-                  setPopup(`the following code countries could not be loaded: ${ARRAY_RESPONSE.join(' ')} `)
-              }else setPopup('Success')
+            if(response.length > 0){
+                setPopup('Success')
+
+            }else{
+                setPopup('Error')
+            }
             })
           .catch(error => console.Error('Error:', error));
         
@@ -99,6 +106,7 @@ export function AddActivity(props) {
             return
         }
             }
+      }else e.preventDefault()
     
     }
 
@@ -112,6 +120,7 @@ export function AddActivity(props) {
                 className={s.popup_button} 
                 onClick={(e) =>{
                     setPopup('')
+                    window.location.reload(true)
 
                    
             
@@ -199,7 +208,7 @@ export function AddActivity(props) {
                 defaultValue=''
                 >
                 <option value='' >Select an option</option>
-                    {props.countries.map(e => <option key={e.code} value={e.code}  >{e.name}</option>)}
+                    {props.list.map(e => <option key={e.code} value={e.code}  >{e.name}</option>)}
                 </select>
                
                 <button 
@@ -238,13 +247,13 @@ export function AddActivity(props) {
 
 export const mapStateToProps = function(state){
     return {
-        countries: state.countries
+        list: state.list
     }
 };
 
 export const mapDispatchToProps = function(dispatch){
     return {
-        getUrl: (filterq) => dispatch(getUrl(null,null,filterq,0,250)),
+        getList: () => dispatch(getList()),
          }
 
 };

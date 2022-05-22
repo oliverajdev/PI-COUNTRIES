@@ -22,6 +22,8 @@ router.get('/:idcountry',async (req,res,next) => {
 })
 
 
+
+
 router.get('/',async (req,res,next) => {
     const {search,orderq,filterq,page,size} = req.query;
     var order = null;

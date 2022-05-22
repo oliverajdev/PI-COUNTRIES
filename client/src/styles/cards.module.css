@@ -19,3 +19,38 @@
 .name{
     font-weight: 500;
 }
+
+.c_star{
+   
+    display: inline-block;
+    float: left;
+    border: none;
+    font-size: 17px;
+    color: rgb(158, 157, 142);
+    cursor: pointer;
+    transition: 0.9s;
+}
+
+.f_star{
+   
+    display: inline-block;
+    float: left;
+    border: none;
+    font-size: 17px;
+    color: rgb(166, 162, 46);
+    cursor: pointer;
+    transition: 0.9s;
+}
+
+.c_star:hover{
+    color: rgb(166, 162, 46);
+
+}
+
+
+
+
+.link{
+    margin-left: -15px;
+    color: rgb(255, 246, 246);
+}

@@ -6,6 +6,53 @@ const { Tourism } = require('../db.js');
 const router = Router();
 
 
+router.get('/:id', async(req,res,next) => {
+    var id = req.params.id;
+
+    id = parseInt(id)
+    
+
+    try{
+
+        if(typeof id === 'number'){
+           const matchActivity = await Tourism.findOne({
+                where:{
+                    id: id
+                }
+            })
+            
+
+            res.status(201).json(matchActivity)
+        }else{
+            res.status(404).send('Error id')
+        }
+
+
+    }catch(err){
+        next(err)
+    }
+})
+
+
+
+
+router.get('/', async (req,res,next) =>{
+
+    try{
+        const activities = await Tourism.findAll({
+            include:{
+                model: Country,
+                attributes: ['image']
+            }
+           })
+
+        res.status(200).json(activities)
+    }catch(err){
+        next(err)
+    }
+})
+
+
 
 router.post('/',async (req,res,next) => {
    
@@ -13,29 +60,25 @@ router.post('/',async (req,res,next) => {
     
     try{
         if(name && types && difficulty && duration && season && countries){
-    
 
-           const ARRAY_MATCH_COUNTRIES = countries.map(async e =>{
-             const [activity, created] = await Tourism.findOrCreate({
-                 where:{name:name},
-                 include:[{
-                     model:Country,
-                     where:{code:e}
-                 }],
-                 defaults:{
-                     types:types,
-                     difficulty:difficulty,
-                     duration:duration,
-                     season:season
-                 }
-             })
-             if(created) await activity.setCountries([e])
-             else return e
-           })
-              
-        const result = await Promise.all(ARRAY_MATCH_COUNTRIES)
+        const [activity,created] =  await Tourism.findOrCreate({
+                where:{name:name},
+               
+                defaults:{
+                    types:types,
+                    difficulty:difficulty,
+                    duration:duration,
+                    season:season
+                }
+            })
+
+        
+        
+        const result = await activity.setCountries(countries)
+        console.log(result)
 
         res.status(201).json(result)
+
 
             
         }else  res.status(404).json('Missing data')
@@ -48,12 +91,16 @@ router.post('/',async (req,res,next) => {
 })
 
 
+
 router.put('/update/:id', async (req,res,next) => {
-  const id = req.params.code;
-  const {name,type,duration,difficulty,season} = req.query;
+  var id = req.params.id;
+  id = parseInt(id)
+
+  const {name,type,duration,difficulty,season} = req.body;
+  
   try{
       if(id){
-        const update = await   Tourism.update({
+        const update = await  Tourism.update({
                name:name,
                type:type,
                duration: duration,
@@ -64,6 +111,7 @@ router.put('/update/:id', async (req,res,next) => {
                    id: id
                }
            })
+
            res.status(201).json(update);
       }
   }catch(err){
@@ -73,7 +121,28 @@ router.put('/update/:id', async (req,res,next) => {
 })
 
 
-router.delete('/delete')
+router.delete('/delete/:id', async (req,res,next) => {
+    var id = req.params.id;
+ 
+      id = parseInt(id)
+    
+    try{
+        if(id){
+            const deleteActivity = await Tourism.destroy({
+                where:{
+                    id:id
+                }
+            })
+
+            console.log('delete',deleteActivity)
+            res.status(201).json(deleteActivity)
+        }
+    }catch(err){
+        
+        next(err)
+    }
+})
+
 
 
 module.exports = router;

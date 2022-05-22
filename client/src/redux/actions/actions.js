@@ -1,8 +1,15 @@
 
 
 export const GET_URL = 'GET_URL';
-export const SET_PAGE = 'SET_PAGE'
-export const DETAIL_COUNTRY = 'DETAIL_COUNTRY'
+export const SET_PAGE = 'SET_PAGE';
+export const DETAIL_COUNTRY = 'DETAIL_COUNTRY';
+export const ADD_FAVORITE = 'ADD_FAVORITE';
+export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
+export const GET_ACTIVITIES = 'GET_ACTIVITIES';
+export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
+export const GET_LIST = 'GET_LIST'
+
+
 
 export const getUrl = (searchq,orderq,filterq,pageq,sizeq) => dispatch => {
 
@@ -53,4 +60,76 @@ export const getDetail = (code) => dispatch => {
         })
     })
 
+}
+
+
+export const addFavorite = (code) => dispatch => {
+    
+    return fetch(`http://localhost:3001/countries/${code}`)
+    .then(response => response.json())
+    .then(json =>{
+        dispatch({
+            type: ADD_FAVORITE,
+            payload: json
+        })
+    })
+}
+
+export const removeFavorite = (code) => {
+    console.log('remove',code)
+    return {
+        type: REMOVE_FAVORITE,
+        payload:code
+    }
+}
+
+
+export const getActivities = () => dispatch => {
+
+    return fetch(`http://localhost:3001/activity`)
+    .then(response => response.json())
+    .then(json =>{
+        console.log(json)
+        dispatch({
+            type: GET_ACTIVITIES,
+            payload: json
+        })
+    })
+
+}
+
+export const deleteActivity = (id) => dispatch => {
+
+    return fetch(`http://localhost:3001/activity/delete/${id}`,{
+        method: 'DELETE',
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      })
+    .then(response => response.json())
+    .then(json =>{
+        dispatch({
+            type: DELETE_ACTIVITY,
+            payload: id
+        })
+    })
+
+}
+
+
+export const getFav = (countries) => dispatch => {
+    return fetch(`http://localhost:3001/countriescode?countries=${countries}`)
+}
+
+export const getList = () => dispatch => {
+    
+    return fetch(`http://localhost:3001/countries?filterq=name,ASC&page=0&size=250`)
+    .then(response => response.json())
+    .then( json => {
+        dispatch({
+            type: GET_LIST,
+            payload: json.rows
+        })
+       
+    })
 }

@@ -1,0 +1,61 @@
+
+
+
+.img{
+    height: 100%;
+    width: 50px;
+    object-fit: contain;
+    margin-bottom: -10px;
+}
+
+
+.container{
+    width: 90%;
+    height: 70px;
+    margin-top: 15px;
+    color:white;
+    text-align: start;
+    border-bottom: 1.2px solid grey;
+}
+
+.p, .ul, .title, .ul li{
+    display: inline-block;
+    margin: 0 20px 0 20px;
+    
+}
+
+.title{
+    font-size: 23px;
+    font-weight: 500;
+    border-right: 1.2px solid grey;
+    padding-right: 20px;
+   
+    
+}
+
+
+
+.button{
+    margin-right: 20px;
+    margin-left: 50px;
+    width: 70px;
+    height: 35px;
+    border: none;
+    background-color: rgb(115, 115, 169);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.link{
+    cursor: pointer;
+    font-style: italic;
+    font-size: 14px;
+    display: inline-block;
+    color: grey
+
+   
+}
+
+
+
+
