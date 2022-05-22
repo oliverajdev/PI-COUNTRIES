@@ -1,7 +1,13 @@
 .img{
     height: 140px;
     width: 240px;
-    object-fit:cover
+    object-fit:cover;
+    transition: 0.9s;
+}
+
+.img:hover{
+    transform: translate(15px);
+
 }
 
 .cards {

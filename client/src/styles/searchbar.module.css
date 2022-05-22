@@ -16,15 +16,16 @@
     border: none;
     color: rgb(115, 115, 169);
     transition: 0.9s all;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .button:hover{
     cursor: pointer;
+    color: rgb(92, 92, 172);
 }
 
 .form{
     width: 80%;
     float: right;
-    margin-top: 60px;
+  
 }

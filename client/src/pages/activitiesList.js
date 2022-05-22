@@ -30,7 +30,7 @@ export function ActivitiesList(props) {
                 deleteActivity = {props.deleteActivity}
                 />
                   
-            )): <span style={{color:'white'}}>No se encontraron resultados</span>}
+            )): <span style={{color:'white'}}>No results found</span>}
         </div>
     )
 

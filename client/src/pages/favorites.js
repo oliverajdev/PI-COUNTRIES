@@ -21,7 +21,7 @@ export function Favorites(props) {
                    
                    />
                )
-           ): <span>No se encontraron resultados</span>}
+           ): <span>No results found</span>}
         </div>
     )
 }

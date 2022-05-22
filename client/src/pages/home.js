@@ -61,7 +61,7 @@ export  function Home(props){
                    
                    />
                )
-           ): <span>No se encontraron resultados</span>)}
+           ): <span>No results found</span>)}
             
            </div>
 
