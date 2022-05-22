@@ -6,6 +6,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import store from "./redux/store/store"
+import dovenv from "dotenv"
+dovenv.config();
+
+export const  baseUrl = process.env.REACT_APP_API || 'http://localhost:3001'
 
 
 ReactDOM.render(

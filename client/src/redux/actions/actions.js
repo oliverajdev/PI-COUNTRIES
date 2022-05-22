@@ -1,3 +1,4 @@
+import { baseUrl } from "../..";
 
 
 export const GET_URL = 'GET_URL';
@@ -8,6 +9,8 @@ export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 export const GET_ACTIVITIES = 'GET_ACTIVITIES';
 export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
 export const GET_LIST = 'GET_LIST'
+
+
 
 
 
@@ -22,7 +25,7 @@ export const getUrl = (searchq,orderq,filterq,pageq,sizeq) => dispatch => {
     !sizeq ? sizeq = 9 :  sizeq = sizeq
 
     const addToUrl = `?${search}${order}${filter}&page=${pageq}&size=${sizeq}`
-    return fetch(`http://localhost:3001/countries${addToUrl}`)
+    return fetch(`${baseUrl}/countries${addToUrl}`)
     .then(response => response.json())
     .then((json) => {
         
@@ -51,7 +54,7 @@ export const setPage = (current) => {
 
 export const getDetail = (code) => dispatch => {
 
-    return fetch(`http://localhost:3001/countries/${code}`)
+    return fetch(`${baseUrl}/countries/${code}`)
     .then(response => response.json())
     .then(json =>{
         dispatch({
@@ -65,7 +68,7 @@ export const getDetail = (code) => dispatch => {
 
 export const addFavorite = (code) => dispatch => {
     
-    return fetch(`http://localhost:3001/countries/${code}`)
+    return fetch(`${baseUrl}/countries/${code}`)
     .then(response => response.json())
     .then(json =>{
         dispatch({
@@ -86,7 +89,7 @@ export const removeFavorite = (code) => {
 
 export const getActivities = () => dispatch => {
 
-    return fetch(`http://localhost:3001/activity`)
+    return fetch(`${baseUrl}/activity`)
     .then(response => response.json())
     .then(json =>{
         console.log(json)
@@ -100,7 +103,7 @@ export const getActivities = () => dispatch => {
 
 export const deleteActivity = (id) => dispatch => {
 
-    return fetch(`http://localhost:3001/activity/delete/${id}`,{
+    return fetch(`${baseUrl}/activity/delete/${id}`,{
         method: 'DELETE',
         headers:{
           'Content-Type': 'application/json'
@@ -118,12 +121,12 @@ export const deleteActivity = (id) => dispatch => {
 
 
 export const getFav = (countries) => dispatch => {
-    return fetch(`http://localhost:3001/countriescode?countries=${countries}`)
+    return fetch(`${baseUrl}/countriescode?countries=${countries}`)
 }
 
 export const getList = () => dispatch => {
     
-    return fetch(`http://localhost:3001/countries?filterq=name,ASC&page=0&size=250`)
+    return fetch(`${baseUrl}/countries?filterq=name,ASC&page=0&size=250`)
     .then(response => response.json())
     .then( json => {
         dispatch({

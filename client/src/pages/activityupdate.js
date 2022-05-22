@@ -4,7 +4,7 @@ import s from "../styles/activitiesupdate.module.css"
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { baseUrl } from "..";
 
 
 
@@ -16,7 +16,7 @@ export function ActivityUpdate(props) {
 
     useEffect(() =>{
         
-    fetch(`http://localhost:3001/activity/${id}`)
+    fetch(`${baseUrl}/activity/${id}`)
     .then(response => response.json())
     .then(json =>{
         console.log(json)
