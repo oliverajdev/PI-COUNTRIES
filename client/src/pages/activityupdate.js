@@ -84,7 +84,9 @@ export function ActivityUpdate(props) {
       .then(r => {
           setPopup('Success')
       })
-      .catch(error => console.Error('Error:', error));
+      .catch(err =>{
+        setPopup('Error')
+    });
     
   
     }else return

@@ -74,6 +74,7 @@ const allcountries = axios.get('https://restcountries.com/v3/all')
 .then(response => response.data)
 
 allcountries.then(r =>{
+  console.log(r)
        r.map( e => {
        Country.create({
            code : e.cca3,

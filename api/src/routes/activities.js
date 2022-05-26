@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { Country } = require('../db.js');
 const { Tourism } = require('../db.js');
-
+const { Op } = require('sequelize')
 
 const router = Router();
 
@@ -57,14 +57,19 @@ router.get('/', async (req,res,next) =>{
 router.post('/',async (req,res,next) => {
    
     const {name, types, difficulty, duration, season, countries} = req.body;
-    
+    console.log(name)
     try{
         if(name && types && difficulty && duration && season && countries){
 
         const [activity,created] =  await Tourism.findOrCreate({
-                where:{name:name},
-               
+            where:{
+                name:{
+                      [Op.iLike]: `%${name}`
+                    }
+
+            },
                 defaults:{
+                    name: name,
                     types:types,
                     difficulty:difficulty,
                     duration:duration,
@@ -99,7 +104,14 @@ router.put('/update/:id', async (req,res,next) => {
   const {name,type,duration,difficulty,season} = req.body;
   
   try{
-      if(id){
+    const activity = await Tourism.findOne({
+        where:{
+           name: name
+        }
+       }
+     )
+    
+      if(!activity){
         const update = await  Tourism.update({
                name:name,
                type:type,
@@ -113,7 +125,7 @@ router.put('/update/:id', async (req,res,next) => {
            })
 
            res.status(201).json(update);
-      }
+      }else res.status(404).send('name already exist')
   }catch(err){
       next(err)
 
