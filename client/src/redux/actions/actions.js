@@ -9,7 +9,7 @@ export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 export const GET_ACTIVITIES = 'GET_ACTIVITIES';
 export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
 export const GET_LIST = 'GET_LIST'
-
+export const CLEAN_DETAIL = 'CLEAN_DETAIL'
 
 
 
@@ -135,4 +135,10 @@ export const getList = () => dispatch => {
         })
        
     })
+}
+
+export const CleanDetail = () => {
+    return {
+        type:CLEAN_DETAIL
+    }
 }

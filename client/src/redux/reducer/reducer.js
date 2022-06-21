@@ -1,4 +1,4 @@
-import {ADD_FAVORITE, REMOVE_FAVORITE, DETAIL_COUNTRY, GET_URL,SET_PAGE, GET_ACTIVITIES, DELETE_ACTIVITY, GET_LIST} from "../actions/actions"
+import {ADD_FAVORITE, REMOVE_FAVORITE, DETAIL_COUNTRY, GET_URL,SET_PAGE, GET_ACTIVITIES, DELETE_ACTIVITY, GET_LIST, CLEAN_DETAIL} from "../actions/actions"
 
 const inicialState = {
     countries : [],
@@ -57,6 +57,10 @@ const rootReducer = (state = inicialState, action) => {
         case GET_LIST: return{
             ...state,
             list: action.payload
+        }
+        case CLEAN_DETAIL: return{
+            ...state,
+            country: {}
         }
         default: return {
             ...state,

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getDetail } from "../redux/actions/actions";
+import { CleanDetail, getDetail } from "../redux/actions/actions";
 import { useEffect } from "react";
 import  Activities  from "../components/activities";
 import s from "../styles/detailcountry.module.css"
@@ -12,6 +12,7 @@ export function DetailCountry(props) {
     
     useEffect(() => {
         props.getDetail(code)
+        props.CleanDetail()
       
     }, []);
 
@@ -66,6 +67,7 @@ export const mapStateToProps = function(state){
 export const mapDispatchToProps = function(dispatch){
     return {
         getDetail: (code) => dispatch(getDetail(code)),
+        CleanDetail: () => dispatch(CleanDetail())
        
          }
 
