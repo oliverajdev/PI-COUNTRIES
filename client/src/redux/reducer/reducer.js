@@ -18,7 +18,7 @@ const inicialState = {
 
 
 const rootReducer = (state = inicialState, action) => {
-    console.log(action)
+    
     switch(action.type) {
         case GET_URL: return {
             ...state,
